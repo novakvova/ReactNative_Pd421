@@ -8,6 +8,8 @@ import {ThemedView} from '@/components/themed-view';
 import {Link} from 'expo-router';
 import {useEffect} from "react";
 import axios from "axios";
+import {IGenericResponse} from "@/types/IGenericResponse";
+import {ICategoryResponse} from "@/types/ICategoryResponse";
 
 export default function HomeScreen() {
 
@@ -19,8 +21,9 @@ export default function HomeScreen() {
     const loadDatCategories = async () => {
         try {
             const result =
-                await axios.get("https://pd421.itstep.click/api/categories");
-            console.log("---Categories---",result.data);
+                await axios.get<IGenericResponse<ICategoryResponse>[]>("https://pd421.itstep.click/api/categories");
+            const {data} =  result.data;
+            console.log("---Categories---", data);
         }catch (error) {
             console.log("--У нас проблеми Хюстон--",error);
         }
