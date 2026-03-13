@@ -3,12 +3,23 @@ import {useForm, Controller} from 'react-hook-form';
 import {CreateCategoryFormData, createCategorySchema} from "@/schemas/categorySchema";
 import {zodResolver} from '@hookform/resolvers/zod';
 import CustomInput from "@/components/form/inputs/CustomInput";
+import {useRouter} from "expo-router";
+import {View} from "react-native";
+import PrimaryButton from "@/components/form/buttons/PrimaryButton";
+import AvatarPicker from "@/components/form/AvatarPicker";
 
 const CreateCategoryScreen = () => {
 
-    const {control, handleSubmit, formState: {errors}} = useForm<CreateCategoryFormData>({
+    const router = useRouter();
+
+    const {control, handleSubmit, setValue, formState: {errors}} = useForm<CreateCategoryFormData>({
         resolver: zodResolver(createCategorySchema),
-        defaultValues: {name: '', description: ''}
+        defaultValues: {
+            name: '',
+            description: '',
+            image: undefined
+        }
+
     });
 
     const onSubmit = async (data: CreateCategoryFormData) => {
@@ -18,6 +29,16 @@ const CreateCategoryScreen = () => {
     return (
         <>
             <FormLayout title="Welcome">
+                <Controller
+                    control={control}
+                    name="image"
+                    render={({field}) => (
+                        <AvatarPicker
+                            image={field.value?.uri || null}
+                            onChange={(fileObject) => setValue('image', fileObject)}
+                        />
+                    )}
+                />
                 <Controller
                     control={control}
                     name="name"
@@ -34,6 +55,17 @@ const CreateCategoryScreen = () => {
                         />
                     )}
                 />
+                <View className={"items-center w-full mt-4"}>
+                    <PrimaryButton onPress={handleSubmit(onSubmit)}
+                                   title={"Створити"}
+                    />
+                    <PrimaryButton
+                        title="Скасувати"
+                        variant="secondary"
+                        onPress={() => router.push('/')}
+                    />
+                </View>
+
             </FormLayout>
         </>
     )
