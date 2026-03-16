@@ -54,11 +54,14 @@ app.UseCors("AllowAnyOriginPolicy");
 var path = Path.Combine(builder.Environment.ContentRootPath, "Images");
 Directory.CreateDirectory(path);
 
+StorageOptions.ImagesPath = path;
+
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(path),
     RequestPath = "/category-images"
 });
+
 
 //app.UseHttpsRedirection();
 
@@ -66,9 +69,9 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-//отрмую контекст БД і роблю міграції
 using var scope = app.Services.CreateScope();
 var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 context.Database.Migrate();
+
 
 app.Run();

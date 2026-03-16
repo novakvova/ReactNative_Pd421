@@ -15,6 +15,10 @@ namespace WEB_API.BLL.MapperProfiles.Category
         {
             CreateMap<CreateCategoryDTO, CategoryEntity>()
                 .ForMember(dest => dest.Image, opt => opt.Ignore());
+
+            CreateMap<UpdateCategoryDTO, CategoryEntity>()
+                .ForMember(dest => dest.Image, opt => opt.Ignore())
+                .ForAllMembers(opt => opt.Condition((s, d, sm) => sm != null));
         }
     }
 }
