@@ -15,7 +15,7 @@ type Props = {
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
-const AvatarPicker : React.FC<Props> = ({ image, onChange }: Props) => {
+export default function AvatarPicker({ image, onChange }: Props) {
     const { colorScheme } = useColorScheme();
     const isDark = colorScheme === "dark";
 
@@ -176,5 +176,3 @@ const AvatarPicker : React.FC<Props> = ({ image, onChange }: Props) => {
         </View>
     );
 }
-
-export default AvatarPicker;

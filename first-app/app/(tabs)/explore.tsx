@@ -1,6 +1,4 @@
 
-import CreateCategoryScreen from "@/screens/Category/CreateCategoryScreen";
+import CreateCategoryScreen from "@/screens/category/CreateCategoryScreen";
 
 export default CreateCategoryScreen;
-
-

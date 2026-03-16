@@ -11,7 +11,7 @@ interface FormLayoutProps {
     children: React.ReactNode;
 }
 
-const FormLayout : React.FC<FormLayoutProps> = ({ title, children }: FormLayoutProps) => {
+export default function FormLayout({ title, children }: FormLayoutProps) {
     const insets = useSafeAreaInsets();
     const isDark = false;
 
@@ -47,5 +47,3 @@ const FormLayout : React.FC<FormLayoutProps> = ({ title, children }: FormLayoutP
         </SafeAreaView>
     );
 }
-
-export default FormLayout;
