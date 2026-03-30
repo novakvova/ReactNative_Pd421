@@ -1,12 +1,8 @@
 import {Image} from 'expo-image';
-import {Alert, Button, Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-
-import {HelloWave} from '@/components/hello-wave';
+import {Alert, Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ParallaxScrollView from '@/components/parallax-scroll-view';
-import {ThemedText} from '@/components/themed-text';
 import {ThemedView} from '@/components/themed-view';
-import {Link} from 'expo-router';
-import {useEffect, useState} from "react";
+import {router} from 'expo-router';
 import {ICategoryResponse} from "@/types/ICategoryResponse";
 import {useDeleteCategoryMutation, useGetCategoriesQuery} from "@/store/apis/categoryApi";
 import {IMAGES_URL} from "@/constants/urls";
@@ -24,8 +20,6 @@ export default function HomeScreen() {
         }
     }
 
-
-
     return (
         <ParallaxScrollView
             headerBackgroundColor={{light: '#A1CEDC', dark: '#1D3D47'}}
@@ -36,7 +30,8 @@ export default function HomeScreen() {
                 />
             }>
 
-
+            <Button onPress={() => router.push("/login")} title={"Login"}></Button>
+            <Button onPress={() => router.push("/register")} title={"Register"}></Button>
 
             <ThemedView className="px-5 pt-5 flex-row flex-wrap justify-between">
                 {isLoading ? (
