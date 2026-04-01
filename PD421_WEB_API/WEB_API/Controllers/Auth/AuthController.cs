@@ -12,7 +12,8 @@ namespace WEB_API.Controllers.Auth;
 [ApiController]
 public class AuthController(UserManager<UserEntity> userManager, 
     IJWTTokenService tokenService, RoleManager<RoleEntity> roleManager, 
-    IStorageService storage) : ControllerBase
+    IStorageService storage,
+    IAuthService authService) : ControllerBase
 {
     [HttpPost]
     public async Task<IActionResult> Login([FromBody] LoginDto model)
@@ -33,6 +34,7 @@ public class AuthController(UserManager<UserEntity> userManager,
 
         return Ok(result);
     }
+    
     [HttpPost]
     public async Task<IActionResult> Register([FromForm] RegisterDto model)
     {
@@ -56,8 +58,6 @@ public class AuthController(UserManager<UserEntity> userManager,
             Console.WriteLine("------ ERROR WHEN CREATING USER: ");
             return BadRequest(result.Errors);
         }
-
-       
 
     }
 }

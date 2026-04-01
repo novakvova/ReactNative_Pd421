@@ -69,6 +69,8 @@ try
     builder.Services.AddScoped<ICategoryService, CategoryService>();
     builder.Services.AddScoped<IStorageService, StorageService>();
     builder.Services.AddScoped<IJWTTokenService, JWTTokenService>();
+    builder.Services.AddScoped<IIdentityService, IdentityService>();
+    builder.Services.AddScoped<IAuthService, AuthService>();
     //builder.Services.AddTransient<IJWTTokenService, JWTTokenService>();
 
     builder.Services.AddAutoMapper(cfg =>
